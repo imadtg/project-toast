@@ -5,17 +5,25 @@ import Button from "../Button";
 import Toast from "../Toast";
 
 import styles from "./ToastPlayground.module.css";
+import ToastShelf from "../ToastShelf/ToastShelf";
 
 const VARIANT_OPTIONS = ["notice", "warning", "success", "error"];
 
 function ToastPlayground() {
   const [message, setMessage] = React.useState("");
   const [selectedVariant, setSelectedVariant] = React.useState();
-  const [isToastVisible, setIsToastVisible] = React.useState(false);
-  console.info({ message, selectedVariant });
+  const [toasts, setToasts] = React.useState([]);
   function handleSubmit(event) {
     event.preventDefault();
-    setIsToastVisible(true);
+    setToasts([
+      ...toasts,
+      { message, variant: selectedVariant, id: crypto.randomUUID() },
+    ]);
+    setMessage("");
+    setSelectedVariant("notice");
+  }
+  function handleDismiss(id) {
+    setToasts(toasts.filter((toast) => toast.id !== id));
   }
   return (
     <div className={styles.wrapper}>
@@ -23,13 +31,7 @@ function ToastPlayground() {
         <img alt="Cute toast mascot" src="/toast.png" />
         <h1>Toast Playground</h1>
       </header>
-      {isToastVisible && (
-        <Toast
-          message={message}
-          variant={selectedVariant}
-          handleDismiss={() => setIsToastVisible(false)}
-        />
-      )}
+      <ToastShelf toasts={toasts} handleDismiss={handleDismiss} />
       <form className={styles.controlsWrapper} onSubmit={handleSubmit}>
         <div className={styles.row}>
           <label
