@@ -11,9 +11,11 @@ import { ToastsContext } from "../ToastsProvider/ToastsProvider";
 const VARIANT_OPTIONS = ["notice", "warning", "success", "error"];
 
 function ToastPlayground() {
-  const {toasts, addToast} = React.useContext(ToastsContext)
+  const { addToast } = React.useContext(ToastsContext);
   const [message, setMessage] = React.useState("");
-  const [selectedVariant, setSelectedVariant] = React.useState(VARIANT_OPTIONS[0]);
+  const [selectedVariant, setSelectedVariant] = React.useState(
+    VARIANT_OPTIONS[0]
+  );
   function handleSubmit(event) {
     event.preventDefault();
     addToast(message, selectedVariant);
