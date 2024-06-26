@@ -2,8 +2,6 @@ import React from "react";
 
 import Button from "../Button";
 
-import Toast from "../Toast";
-
 import styles from "./ToastPlayground.module.css";
 import ToastShelf from "../ToastShelf/ToastShelf";
 import { ToastsContext } from "../ToastsProvider/ToastsProvider";
@@ -65,8 +63,6 @@ function ToastPlayground() {
                 {variant}
               </label>
             ))}
-
-            {/* TODO Other Variant radio buttons here */}
           </div>
         </div>
 

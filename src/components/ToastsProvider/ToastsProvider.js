@@ -1,4 +1,5 @@
 import React from "react";
+import useOnKey from "../../hooks/use-on-key";
 
 export const ToastsContext = React.createContext();
 
@@ -13,6 +14,10 @@ function ToastsProvider({ children }) {
   const value = React.useMemo(
     () => ({ toasts, dismissToast, addToast }),
     [toasts, dismissToast, addToast]
+  );
+  useOnKey(
+    "Escape",
+    React.useCallback(() => setToasts([]), [])
   );
   return (
     <ToastsContext.Provider value={value}>{children}</ToastsContext.Provider>
